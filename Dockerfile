@@ -48,10 +48,17 @@ RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.43 --cuda-ve
 WORKDIR /comfyui/custom_nodes
 RUN git clone --quiet https://github.com/ltdrdata/ComfyUI-Impact-Subpack
 RUN git clone --quiet https://github.com/ltdrdata/ComfyUI-Impact-Pack
+RUN git clone --quiet https://github.com/cubiq/ComfyUI_essentials
+
 WORKDIR /comfyui/custom_nodes/ComfyUI-Impact-Subpack
 RUN pip3 install -r requirements.txt
+
 WORKDIR /comfyui/custom_nodes/ComfyUI-Impact-Pack
 RUN pip3 install -r requirements.txt
+
+WORKDIR /comfyui/custom_nodes/ComfyUI_essentials
+RUN pip3 install -r requirements.txt
+
 # Support for the network volume
 WORKDIR /comfyui
 ADD src/extra_model_paths.yaml ./
