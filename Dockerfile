@@ -46,10 +46,6 @@ RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.43 --cuda-ve
 # Change working directory to ComfyUI
 WORKDIR /comfyui
 
-#maybe custom    nodes
-RUN comfy node install ComfyUI-Impact-Subpack
-RUN comfy node install ComfyUI-Impact-Pack
-
 # Support for the network volume
 ADD src/extra_model_paths.yaml ./
 
@@ -60,7 +56,7 @@ WORKDIR /
 RUN uv pip install runpod requests websocket-client
 
 # Add application code and scripts
-ADD src/start.sh handler.py test_input.json ./
+ADD src/start.sh src/restore_snapshot.sh handler.py test_input.json ./
 RUN chmod +x /start.sh
 
 # Add script to install custom nodes
