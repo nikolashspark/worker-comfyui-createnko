@@ -75,7 +75,9 @@ RUN chmod +x /restore_snapshot.sh
 
 # Start the container
 RUN restore_snapshot.sh
-
+RUN comfy --workspace /comfyui \
+          node restore-snapshot /workspace/snapshotIMPACT.json \
+          --pip-non-url
 
 # Add script to install custom nodes
 COPY scripts/comfy-node-install.sh /usr/local/bin/comfy-node-install
