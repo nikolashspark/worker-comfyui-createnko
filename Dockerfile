@@ -74,7 +74,7 @@ ADD src/restore_snapshot.sh ./
 RUN chmod +x /restore_snapshot.sh
 
 # Start the container
-RUN restore_snapshot.sh
+
 RUN comfy --workspace /comfyui \
           node restore-snapshot /workspace/snapshotIMPACT.json \
           --pip-non-url
