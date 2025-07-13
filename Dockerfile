@@ -46,6 +46,10 @@ RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.43 --cuda-ve
 # Change working directory to ComfyUI
 WORKDIR /comfyui
 
+#maybe custom nodes
+RUN comfy node install ComfyUI-Impact-Subpack
+RUN comfy node install ComfyUI-Impact-Pack
+
 # Support for the network volume
 ADD src/extra_model_paths.yaml ./
 
