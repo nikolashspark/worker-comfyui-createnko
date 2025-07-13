@@ -44,9 +44,16 @@ RUN uv pip install comfy-cli pip setuptools wheel
 RUN /usr/bin/yes | comfy --workspace /comfyui install --version 0.3.43 --cuda-version 12.6 --nvidia
 
 # Change working directory to ComfyUI
-WORKDIR /comfyui
 
+WORKDIR /comfyui/custom_nodes
+RUN git clone --quiet https://github.com/ltdrdata/ComfyUI-Impact-Subpack
+RUN git clone --quiet https://github.com/ltdrdata/ComfyUI-Impact-Pack
+WORKDIR /comfyui/custom_nodes/ComfyUI-Impact-Subpack
+RUN pip3 install -r requirements.txt
+WORKDIR /comfyui/custom_nodes/ComfyUI-Impact-Pack
+RUN pip3 install -r requirements.txt
 # Support for the network volume
+WORKDIR /comfyui
 ADD src/extra_model_paths.yaml ./
 
 # Go back to the root
@@ -58,6 +65,7 @@ RUN uv pip install runpod requests websocket-client
 # Add application code and scripts
 ADD src/start.sh src/restore_snapshot.sh handler.py test_input.json ./
 RUN chmod +x /start.sh
+RUN chmod +x /restore_snapshot.sh
 
 # Add script to install custom nodes
 COPY scripts/comfy-node-install.sh /usr/local/bin/comfy-node-install
@@ -69,6 +77,7 @@ ENV PIP_NO_INPUT=1
 # Copy helper script to switch Manager network mode at container start
 COPY scripts/comfy-manager-set-mode.sh /usr/local/bin/comfy-manager-set-mode
 RUN chmod +x /usr/local/bin/comfy-manager-set-mode
+
 
 # Set the default command to run when starting the container
 CMD ["/start.sh"]
