@@ -67,6 +67,16 @@ ADD src/start.sh src/restore_snapshot.sh handler.py test_input.json ./
 RUN chmod +x /start.sh
 RUN chmod +x /restore_snapshot.sh
 
+WORKDIR /
+
+# Add the start and the handler
+ADD src/restore_snapshot.sh ./
+RUN chmod +x /restore_snapshot.sh
+
+# Start the container
+RUN restore_snapshot.sh
+
+
 # Add script to install custom nodes
 COPY scripts/comfy-node-install.sh /usr/local/bin/comfy-node-install
 RUN chmod +x /usr/local/bin/comfy-node-install
