@@ -63,11 +63,14 @@ RUN pip3 install -r requirements.txt
 
 RUN mkdir -p /comfyui/models/ultralytics/bbox
 RUN mkdir -p /comfyui/models/ultralytics/segm
-RUN wget -q --show-progress -O /comfyui/models/ultralytics/bbox/Eyeful_v2-Paired.pt \
-        https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt && \
-    wget -q --show-progress -O /comfyui/models/ultralytics/segm/sam_vit_b_01ec64.pth \
-        https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
-
+#
+#RUN wget -q --show-progress -O /comfyui/models/ultralytics/bbox/Eyeful_v2-Paired.pt \
+#        https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt && \
+#    wget -q --show-progress -O /comfyui/models/ultralytics/segm/sam_vit_b_01ec64.pth \
+#        https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
+#
+RUN wget -q -O models/ultralytics/segm/sam_vit_b_01ec64.pth https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
+RUN wget -q -O models/ultralytics/bbox/Eyeful_v2-Paired.pt https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt
 ##################
 
 
@@ -82,7 +85,7 @@ WORKDIR /
 RUN uv pip install runpod requests websocket-client
 
 # Add application code and scripts
-ADD src/start.sh src/restore_snapshot.sh handler.py test_input.json ./
+ADD src/start.sh src/restore_snapshot.sh handler.py ./
 RUN chmod +x /start.sh
 RUN chmod +x /restore_snapshot.sh
 
