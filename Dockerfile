@@ -41,29 +41,7 @@ ENV PATH="/opt/venv/bin:${PATH}"
 RUN uv pip install comfy-cli pip setuptools wheel
 
 
-#### 14.07.2025 - Ultralytics ####
-WORKDIR /comfyui
-RUN mkdir -p models/ultralytics/bbox
-RUN mkdir -p models/ultralytics/segm
-RUN mkdir -p models/ultralytics/sams
-#
-#RUN wget -q --show-progress -O /comfyui/models/ultralytics/bbox/Eyeful_v2-Paired.pt \
-#        https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt && \
-#    wget -q --show-progress -O /comfyui/models/ultralytics/segm/sam_vit_b_01ec64.pth \
-#        https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
-#
 
-RUN wget -q -O models/ultralytics/segm/sam_vit_b_01ec64.pth https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
-RUN wget -q -O models/ultralytics/bbox/Eyeful_v2-Paired.pt https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt
-RUN wget -q -O models/ultralytics/sams/sam_vit_b_01ec64.pth https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
-
-RUN ls -la /comfyui/models/ultralytics/segm
-RUN ls -la /comfyui/models/ultralytics/bbox
-RUN ls -la /comfyui/models/ultralytics/sams
-
-
-
-##################
 
 
 # Install ComfyUI
@@ -87,7 +65,28 @@ RUN pip3 install -r requirements.txt
 
 
 #### 14.07.2025 - Ultralytics ####
-################old
+WORKDIR /comfyui
+RUN mkdir -p models/ultralytics/bbox
+RUN mkdir -p models/ultralytics/segm
+RUN mkdir -p models/ultralytics/sams
+#
+#RUN wget -q --show-progress -O /comfyui/models/ultralytics/bbox/Eyeful_v2-Paired.pt \
+#        https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt && \
+#    wget -q --show-progress -O /comfyui/models/ultralytics/segm/sam_vit_b_01ec64.pth \
+#        https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
+#
+
+RUN wget -q -O models/ultralytics/segm/sam_vit_b_01ec64.pth https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
+RUN wget -q -O models/ultralytics/bbox/Eyeful_v2-Paired.pt https://huggingface.co/GritTin/LoraStableDiffusion/resolve/c7766cc3c9b8b4f914932ce27f1cd48f25434636/Eyeful_v2-Paired.pt
+RUN wget -q -O models/ultralytics/sams/sam_vit_b_01ec64.pth https://huggingface.co/datasets/Gourieff/ReActor/resolve/main/models/sams/sam_vit_b_01ec64.pth
+
+RUN ls -la /comfyui/models/ultralytics/segm
+RUN ls -la /comfyui/models/ultralytics/bbox
+RUN ls -la /comfyui/models/ultralytics/sams
+
+
+
+##################
 
 
 
